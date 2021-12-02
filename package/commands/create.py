@@ -8,7 +8,7 @@ mutag = settings.mutag
 tty = settings.stdscr
 print = settings._print
 
-files = filter(lambda f: re.match(r'.*\.mp3|.*\.Mp3|.*\.mP3|.*\.MP3', f), os.listdir(cwd))
+files = filter(lambda f: re.match(r'.*\.mp3$|.*\.Mp3$|.*\.mP3$|.*\.MP3$', f), os.listdir(cwd))
 
 def create(command = []):
   try:
@@ -25,5 +25,5 @@ def createList():
   print(f'Listing Files:\n')
   with open(os.path.join(mutag, 'list.txt'), 'w') as lst:
     for i, file in enumerate(files):
-      print(f'{file} found\n')
-      lst.write(f'{file}:{i}')
+      print(f'{file[:-4]} found\n')
+      lst.write(f'{file[:-4]}:{i}')
