@@ -1,8 +1,9 @@
 import sys
 import curses
 
-from .create import create
 from .init import init, reset
+from .create import create
+from .print import Print
 from ..settings import settings
 tty = settings.stdscr
 print = settings._print
@@ -15,6 +16,8 @@ def run(command = []):
       reset()
     elif command[0].lower() == 'create':
       create(command[1:])
+    elif command[0].lower() == 'print':
+      Print(command[1:])
     elif command[0].lower() == 'clear':
       tty.clear()
       curses.flushinp()
