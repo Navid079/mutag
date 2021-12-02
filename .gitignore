@@ -1,0 +1,4 @@
+.mutag
+*.mp3
+**/__pycache__
+**/*.pyc
