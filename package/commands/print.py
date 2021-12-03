@@ -1,5 +1,6 @@
-
 import os
+import curses
+
 from ..settings import settings
 
 cwd = settings.cwd
@@ -18,7 +19,10 @@ def Print(command = []):
 
 
 def printList():
-  print('Printing list...\n')
+  print('Printing list...\n', curses.color_pair(2))
   with open(os.path.join(mutag, 'list.txt'), 'r') as lst:
     for line in lst:
-      print(f'{line}\n')
+      name, id = line.split(':')
+      print(str(name), curses.color_pair(3))
+      print(':')
+      print(f'{str(id)}\n', curses.color_pair(2))
