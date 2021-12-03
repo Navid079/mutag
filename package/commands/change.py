@@ -30,7 +30,7 @@ def changeByIdInteractive(id):
       foundId = int(foundId)
       if id == foundId:
         break
-    if foundId == '':
+    if foundId == '' or foundId != id:
       raise SyntaxError('ID not found!\n')
     while 1:
       try:
@@ -41,11 +41,11 @@ def changeByIdInteractive(id):
         command = settings.stdscr.getstr().decode()
         curses.noecho()
         command = command.split(' ')
-        run(command)
+        run(foundName, command)
       except KeyboardInterrupt:
         settings.stdscr.addstr('Use ')
         settings.stdscr.addstr('exit ', curses.color_pair(1))
-        settings.stdscr.addstr('to exit interctive change\n')
+        settings.stdscr.addstr('to exit "interctive change"\n')
       except SystemExit:
         return
       except:
