@@ -1,8 +1,15 @@
+import curses
 import os
 import re
 
-cwd = os.getcwd()
-files = filter(lambda f: re.match(r'.*\.mp3|.*\.Mp3|.*\.mP3|.*\.MP3', f), os.listdir(cwd))
+from ..settings import settings
+
+cwd = settings.cwd
+mutag = settings.mutag
+tty = settings.stdscr
+print = settings._print
+
+files = filter(lambda f: re.match(r'.*\.mp3$', f, re.IGNORECASE), os.listdir(cwd))
 
 def create(command = []):
   try:
@@ -11,11 +18,13 @@ def create(command = []):
     else:
       raise Exception()
   except:
-      raise SyntaxError('Invalid Command - See create -h for help')
+      raise SyntaxError('Invalid Command - See create -h for help\n')
 
 def createList():
-  print('Creating List...')
-  print(f'Working Directory: {cwd}')
-  print(f'Listing Files:')
-  for file in files:
-    print(f'{file} found')
+  print('Creating List...\n', curses.color_pair(2))
+  print(f'Listing Files:\n', curses.color_pair(2))
+  with open(os.path.join(mutag, 'list.txt'), 'w') as lst:
+    for i, file in enumerate(files):
+      print(f'{file[:-4]} ', curses.color_pair(3))
+      print('found\n', curses.color_pair(2))
+      lst.write(f'{file[:-4]}:{i}\n')

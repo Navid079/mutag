@@ -1,8 +1,10 @@
 import sys
 import curses
 
-from .create import create
 from .init import init, reset
+from .create import create
+from .print import Print
+from .change import change
 from ..settings import settings
 tty = settings.stdscr
 print = settings._print
@@ -15,7 +17,11 @@ def run(command = []):
       reset()
     elif command[0].lower() == 'create':
       create(command[1:])
-    elif command[0].lower() == 'clear':
+    elif command[0].lower() == 'print':
+      Print(command[1:])
+    elif command[0].lower() == 'change':
+      change(command[1:])
+    elif command[0].lower() == 'clear' or command[0].lower() == 'cls':
       tty.clear()
       curses.flushinp()
     elif command[0].lower() == 'exit' and len(command) == 1:
@@ -23,9 +29,9 @@ def run(command = []):
     else:
       raise SyntaxError('Invalid Command\n')
   except SyntaxError as error:
-    print(error.args[0])
+    print(error.args[0], curses.color_pair(1))
   except Exception as e:
     if type(e) is SystemExit:
       raise
     else:
-      print('Invalid Syntax\n')
+      print('Invalid Syntax\n', curses.color_pair(1))
