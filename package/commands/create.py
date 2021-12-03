@@ -8,7 +8,7 @@ mutag = settings.mutag
 tty = settings.stdscr
 print = settings._print
 
-files = filter(lambda f: re.match(r'.*\.mp3$|.*\.Mp3$|.*\.mP3$|.*\.MP3$', f), os.listdir(cwd))
+files = filter(lambda f: re.match(r'.*\.mp3$', f, re.IGNORECASE), os.listdir(cwd))
 
 def create(command = []):
   try:
