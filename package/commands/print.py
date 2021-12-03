@@ -25,4 +25,4 @@ def printList():
       name, id = line.split(':')
       print(str(name), curses.color_pair(3))
       print(':')
-      print(f'{str(id)}\n', curses.color_pair(2))
+      print(f'{str(id)}', curses.color_pair(2))

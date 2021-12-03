@@ -27,4 +27,4 @@ def createList():
     for i, file in enumerate(files):
       print(f'{file[:-4]} ', curses.color_pair(3))
       print('found\n', curses.color_pair(2))
-      lst.write(f'{file[:-4]}:{i}')
+      lst.write(f'{file[:-4]}:{i}\n')
